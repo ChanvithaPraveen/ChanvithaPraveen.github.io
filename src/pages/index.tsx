@@ -10,6 +10,7 @@ import Education from '@/components/Education';
 import TechStack from '../components/TechStack';
 import Footer from '@/components/Footer';
 import Gallery from '@/components/Gallery';
+import Certifications from '@/components/Certifications';
 // import backgroundImage from 'https://png.pngtree.com/thumb_back/fh260/background/20230415/pngtree-website-technology-line-dark-background-image_2344719.jpg'; // Corrected path to the background image
 
 const Home = () => {
@@ -46,6 +47,9 @@ const Home = () => {
         </Box>
         <Box id="techstack" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
           <TechStack />
+        </Box>
+        <Box id="certifications" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+          <Certifications />
         </Box>
         <Box id="gallery" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
           <Gallery />
