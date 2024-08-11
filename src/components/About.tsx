@@ -5,7 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import ImageSearchIcon from '@mui/icons-material/ImageSearch'; 
+import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 // import MediumIcon from '@mui/icons-material/Medium';
 
 const About = () => {
@@ -16,7 +16,7 @@ const About = () => {
       id="about"
       sx={{
         mt: '2rem',
-        padding: '3rem 0',
+        padding: '2rem 0',
         textAlign: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.4)', // Semi-transparent background
         backdropFilter: 'blur(10px)',
@@ -35,7 +35,7 @@ const About = () => {
           sx={{
             width: 200,
             height: 200,
-            margin: '0 auto 1rem',
+            margin: '0.5rem auto 1rem',
             boxShadow: `0 0 10px 4px ${theme.palette.primary.main}`, // Glowing border
           }}
         />
@@ -46,7 +46,10 @@ const About = () => {
         transition={{ duration: 1, delay: 0.5 }}
       >
         <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
-          Chanvitha Praveen
+          Chanvitha Praveen 
+          <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+          BSc. Eng (Hons) Computer Engineering
+        </Typography>
         </Typography>
         <Typography variant="h6" sx={{ color: theme.palette.secondary.main }}>
           chanvithapraween@gmail.com
@@ -106,9 +109,7 @@ const About = () => {
         transition={{ duration: 1, delay: 1 }}
       >
         <Typography variant="body1" sx={{ maxWidth: '1000px', margin: '1rem auto', color: "text.secondary" }}>
-          As a Final Year Computer Engineering undergraduate (Graduate within a month), passionate in Full Stack Web
-          Developing, Machine Learning & exploring new technologies. I possess a burning desire to solve real world problems. I’m
-          a hardworking, responsible team player and eager to contribute and learn within a dynamic environment.
+          As a Computer Engineer, passionate in Full Stack Web Developing, Machine Learning & exploring new technologies. I possess a burning desire to solve real world problems. I’m a hardworking, responsible team player and eager to contribute and learn within a dynamic environment.
         </Typography>
       </motion.div>
     </Box>
