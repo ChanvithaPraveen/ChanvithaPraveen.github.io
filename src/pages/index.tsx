@@ -29,7 +29,7 @@ const Home = () => {
     >
       <Container maxWidth="xl">
         <Head>
-          <title>My Portfolio</title>
+          <title>Chanvitha Praveen</title>
           <meta name="description" content="My personal portfolio" />
         </Head>
         <Navbar />
