@@ -1,20 +1,20 @@
-import React from 'react';
-import { Box, Typography, Card, CardContent, CardMedia, Button, Grid } from '@mui/material';
-import theme from '@/theme';
+import { motion } from 'framer-motion';
+import SectionHeader from './ui/SectionHeader';
+import TerminalWindow from './ui/TerminalWindow';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import LaunchIcon from '@mui/icons-material/Launch';
 
-// Define the type for certification items
-interface CertificationItem {
+interface Cert {
   logo: string;
   courseName: string;
   description: string;
   link: string;
 }
 
-// Example certifications
-const certifications: CertificationItem[] = [
+const certifications: Cert[] = [
   {
     logo: '/coursera.png',
-    courseName: 'Python Data Structures University of MICHIGAN ',
+    courseName: 'Python Data Structures — University of Michigan',
     description: '',
     link: 'https://www.coursera.org/account/accomplishments/verify/XNZC76Q72C3R',
   },
@@ -26,7 +26,7 @@ const certifications: CertificationItem[] = [
   },
   {
     logo: '/coursera.png',
-    courseName: 'React Basics - Meta ',
+    courseName: 'React Basics — Meta',
     description: '',
     link: 'https://www.coursera.org/account/accomplishments/verify/6K8KHLAPUYH5',
   },
@@ -38,70 +38,74 @@ const certifications: CertificationItem[] = [
   },
   {
     logo: '/coursera.png',
-    courseName: 'SQL For Data Science - UCDavis ',
+    courseName: 'SQL For Data Science — UC Davis',
     description: '',
     link: 'https://www.coursera.org/account/accomplishments/certificate/6F8ABW67RB2S',
   },
   {
     logo: '/cisco.jpg',
-    courseName: 'Introduction To Cybersecurity - Cisco',
+    courseName: 'Introduction To Cybersecurity — Cisco',
     description: '',
     link: 'https://www.credly.com/badges/6cba6cba-ac08-4715-9a89-920c307ebe89?source=linked_in_profile',
   },
 ];
 
-const Certifications: React.FC = () => {
+const Certifications = () => {
   return (
-    <Box sx={{ padding: '2rem' }}>
-        <Box
-        sx={{
-          display: 'inline-block',
-          textAlign: 'center',
-          padding: '0.5rem',
-          width: '160px',
-          borderRadius: '50px',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(10px)',
-          // border: `2px solid ${theme.palette.secondary.main}`,
-          marginBottom: '2rem',
-        }}
-      >
-        <Typography variant="h5" sx={{ color: theme.palette.primary.main }}>Certifications</Typography>
-      </Box>
-      
-      <Grid container spacing={2}>
-        {certifications.map((cert, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
-            <Card sx={{ display: 'flex', mb: '-2rem', flexDirection: 'column', alignItems: 'center' }}>
-              <CardMedia
-                component="img"
-                sx={{ width: '100%', height: '100px', margin: '1rem' }}
-                image={cert.logo}
-                alt={cert.courseName}
-              />
-              <CardContent>
-                <Typography variant="h6" sx={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-                  {cert.courseName}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center', marginBottom: '1rem' }}>
-                  {cert.description}
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  href={cert.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ width: '100%' }}
-                >
-                  View Credential
-                </Button>
-              </CardContent>
-            </Card>
-          </Grid>
+    <section id="certifications" className="py-12 md:py-16">
+      <SectionHeader
+        index="06"
+        command="ls ./certs --signed --verified"
+        title="certifications.dat"
+        subtitle="Hash-verified academic & technical credentials"
+      />
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {certifications.map((c, i) => (
+          <motion.a
+            key={i}
+            href={c.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: (i % 6) * 0.06 }}
+            className="block hover-lift"
+            style={{ textDecoration: 'none' }}
+          >
+            <TerminalWindow title={`cert_0x${(i + 1).toString(16).padStart(2, '0')}`}>
+              <div className="p-4 flex flex-col gap-3 font-mono">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-12 h-12 border border-[var(--border-color)] grid place-items-center p-1.5"
+                    style={{ background: 'rgba(255,255,255,0.05)' }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.logo} alt={c.courseName} className="max-w-full max-h-full object-contain" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-1 text-[10px] text-[var(--neon-green)]">
+                      <VerifiedIcon style={{ fontSize: 12 }} />
+                      VERIFIED
+                    </div>
+                    <div className="text-[12.5px] text-[var(--text-primary)] leading-tight">
+                      {c.courseName}
+                    </div>
+                  </div>
+                </div>
+                <div className="border-t border-[var(--border-color)] pt-2 flex items-center justify-between text-[11px]">
+                  <span className="text-[var(--text-muted)]">hash: {(0xb1f2e30 + i * 0x451).toString(16)}</span>
+                  <span className="text-[var(--neon-cyan)] flex items-center gap-1">
+                    open <LaunchIcon style={{ fontSize: 11 }} />
+                  </span>
+                </div>
+              </div>
+            </TerminalWindow>
+          </motion.a>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </section>
   );
 };
 

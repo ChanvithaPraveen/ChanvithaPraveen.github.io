@@ -1,95 +1,91 @@
-import React from 'react';
-import { Box, Typography, Card, CardContent, LinearProgress } from '@mui/material';
 import { motion } from 'framer-motion';
-import { useTheme } from '@mui/material/styles';
 import educationData from '../data/education';
+import SectionHeader from './ui/SectionHeader';
+import TerminalWindow from './ui/TerminalWindow';
+import SchoolIcon from '@mui/icons-material/School';
+
+interface EduItem {
+  institution: string;
+  degree: string;
+  duration: string;
+  progress: number;
+  description: string;
+}
 
 const Education = () => {
-  const theme = useTheme();
-
+  const items = educationData as EduItem[];
   return (
-    <Box id="education" sx={{ mt: '-1rem', mb: '2rem', textAlign: 'center', px: 2 }}>
-      <Box
-        sx={{
-          display: 'inline-block',
-          padding: '0.5rem',
-          width: '150px',
-          borderRadius: '50px',
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(10px)',
-          marginBottom: '4rem',
-        }}
-      >
-        <Typography variant="h5" sx={{ color: theme.palette.secondary.main }}>
-          Education
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '2rem',
-        }}
-      >
-        {educationData.map((edu, index) => (
+    <section id="education" className="py-12 md:py-16">
+      <SectionHeader
+        index="05"
+        command="tail -f ~/.bash_history | grep 'edu'"
+        title="education.log"
+        subtitle="Tracing knowledge acquisition pipeline..."
+      />
+
+      <div className="grid lg:grid-cols-3 gap-5">
+        {items.map((edu, i) => (
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
-            key={index}
-            style={{ width: '100%', maxWidth: '600px' }}
+            key={i}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: i * 0.08 }}
           >
-            <Card sx={{ position: 'relative', overflow: 'visible' }}>
-              <Box
-                sx={{
-                  height: '20px',
-                  backgroundColor: theme.palette.primary.main,
-                  borderTopLeftRadius: '4px',
-                  borderTopRightRadius: '4px',
-                }}
-              />
-              <CardContent
-                sx={{
-                  position: 'relative',
-                  padding: '2rem',
-                  '&:hover .details': {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                }}
-              >
-                <Typography variant="h6" sx={{ mb: '0.5rem' }}>
-                  {edu.degree}
-                </Typography>
-                <Typography variant="subtitle1" sx={{ mb: '0.5rem', color: 'text.secondary' }}>
-                  {edu.institution}
-                </Typography>
-                <Typography variant="subtitle2" sx={{ mb: '0.5rem', color: 'text.secondary' }}>
+            <TerminalWindow title={`./node_${i + 1}.edu`} className="h-full hover-lift">
+              <div className="p-5 font-mono">
+                <div className="flex items-start gap-3 mb-3">
+                  <div
+                    className="w-10 h-10 grid place-items-center border border-[var(--neon-green)] text-[var(--neon-green)]"
+                    style={{ background: 'rgba(0, 255, 65, 0.08)' }}
+                  >
+                    <SchoolIcon style={{ fontSize: 18 }} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-[10px] text-[var(--text-muted)]">[ NODE_{String(i + 1).padStart(2, '0')} ]</div>
+                    <div className="text-[var(--neon-green)] font-bold text-[14px] leading-tight">
+                      {edu.institution}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-[var(--text-secondary)] text-[12.5px] mb-2 leading-5">
+                  <span className="text-[var(--neon-cyan)]">@</span> {edu.degree}
+                </div>
+                <div className="text-[var(--text-muted)] text-[11.5px] mb-3">
                   {edu.duration}
-                </Typography>
-                <Box
-                  className="details"
-                  sx={{
-                    opacity: 0,
-                    transform: 'translateY(-10px)',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  <Typography variant="body2" sx={{ mt: '1rem', color: 'text.secondary' }}>
-                    {edu.description}
-                  </Typography>
-                </Box>
-                <Box sx={{ mt: '1rem' }}>
-                  <LinearProgress variant="determinate" value={edu.progress} />
-                </Box>
-              </CardContent>
-            </Card>
+                </div>
+
+                <div className="border-t border-[var(--border-color)] pt-3">
+                  <div className="flex items-center justify-between text-[11px] mb-1.5">
+                    <span className="text-[var(--text-muted)]">progress</span>
+                    <span className="text-[var(--neon-green)]">{edu.progress}%</span>
+                  </div>
+                  <div className="h-1.5 bg-[rgba(0,0,0,0.5)] border border-[var(--border-color)] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${edu.progress}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, delay: i * 0.1 }}
+                      className="h-full"
+                      style={{
+                        background: 'linear-gradient(90deg, var(--neon-green), var(--neon-cyan))',
+                        boxShadow: '0 0 6px var(--neon-green)',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {edu.description && (
+                  <div className="mt-3 text-[var(--text-secondary)] text-[12px] italic">
+                    <span className="text-[var(--text-muted)]">{`// `}</span>{edu.description}
+                  </div>
+                )}
+              </div>
+            </TerminalWindow>
           </motion.div>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </section>
   );
 };
 

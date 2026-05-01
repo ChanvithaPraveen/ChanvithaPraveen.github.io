@@ -1,118 +1,139 @@
-import React from 'react';
-import { Typography, Box, Avatar, useTheme, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import ImageSearchIcon from '@mui/icons-material/ImageSearch';
-// import MediumIcon from '@mui/icons-material/Medium';
+import SectionHeader from './ui/SectionHeader';
+import TerminalWindow from './ui/TerminalWindow';
+
+const STATS = [
+  { label: 'projects_built', value: '30+', accent: 'var(--neon-green)' },
+  { label: 'years_coding', value: '6+', accent: 'var(--neon-cyan)' },
+  { label: 'tech_stack', value: '20+', accent: 'var(--neon-amber)' },
+  { label: 'coffee_consumed', value: '∞', accent: 'var(--neon-pink)' },
+];
 
 const About = () => {
-  const theme = useTheme();
-
   return (
-    <Box
-      id="about"
-      sx={{
-        mt: '2rem',
-        padding: '2rem 0',
-        textAlign: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.4)', // Semi-transparent background
-        backdropFilter: 'blur(10px)',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.4)',
-        borderRadius: '15px',
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <Avatar
-          alt="My Photo"
-          src="/my-photo.png"
-          sx={{
-            width: 200,
-            height: 200,
-            margin: '0.5rem auto 1rem',
-            boxShadow: `0 0 10px 4px ${theme.palette.primary.main}`, // Glowing border
-          }}
-        />
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
-          Chanvitha Praveen 
-          <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-          BSc. Eng (Hons) Computer Engineering
-        </Typography>
-        </Typography>
-        <Typography variant="h6" sx={{ color: theme.palette.secondary.main }}>
-          chanvithapraween@gmail.com
-        </Typography>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '0.2rem' }}>
-          <IconButton
-            aria-label="LinkedIn"
-            href="https://www.linkedin.com/in/chanvithapraveen/"
-            target="_blank"
-            sx={{ transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-          >
-            <LinkedInIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-          <IconButton
-            aria-label="GitHub"
-            href="https://github.com/ChanvithaPraveen"
-            target="_blank"
-            sx={{ transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-          >
-            <GitHubIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-          <IconButton
-            aria-label="Facebook"
-            href="https://facebook.com/chanvitha.edirisinghedewayalage"
-            target="_blank"
-            sx={{ transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-          >
-            <FacebookIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-          <IconButton
-            aria-label="Twitter"
-            href="https://x.com/ChanvithaP"
-            target="_blank"
-            sx={{ transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-          >
-            <TwitterIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-          <IconButton
-            aria-label="Shutterstock"
-            href="https://www.shutterstock.com/g/chanvitha+praveen"
-            target="_blank"
-            sx={{ transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-          >
-            <ImageSearchIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-        </Box>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1 }}
-      >
-        <Typography variant="body1" sx={{ maxWidth: '1000px', margin: '1rem auto', color: "text.secondary" }}>
-          As a Computer Engineer, passionate in Full Stack Web Developing, Machine Learning & exploring new technologies. I possess a burning desire to solve real world problems. I’m a hardworking, responsible team player and eager to contribute and learn within a dynamic environment.
-        </Typography>
-      </motion.div>
-    </Box>
+    <section id="about" className="py-12 md:py-16 relative">
+      <SectionHeader
+        index="01"
+        command="cat ./about.md"
+        title="whoami"
+        subtitle="Decoding operator profile..."
+      />
+
+      <div className="grid lg:grid-cols-12 gap-6">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-7"
+        >
+          <TerminalWindow title="~/about/profile.md" className="h-full">
+            <div className="p-5 md:p-7 font-mono text-[14px] leading-relaxed">
+              <div className="text-[var(--text-muted)] mb-3">{`# about.md`}</div>
+              <p className="mb-4 text-[var(--text-primary)]">
+                <span className="text-[var(--neon-cyan)]">const</span>{' '}
+                <span className="text-[var(--neon-green)]">me</span>{' '}
+                <span className="text-[var(--neon-amber)]">=</span>{' '}
+                <span className="text-[var(--text-muted)]">{'{'}</span>
+              </p>
+              <div className="pl-5 space-y-2">
+                <p>
+                  <span className="text-[var(--neon-pink)]">name</span>:{' '}
+                  <span className="text-[var(--neon-green)]">{`"Chanvitha Praveen"`}</span>,
+                </p>
+                <p>
+                  <span className="text-[var(--neon-pink)]">title</span>:{' '}
+                  <span className="text-[var(--neon-green)]">{`"Computer Engineer"`}</span>,
+                </p>
+                <p>
+                  <span className="text-[var(--neon-pink)]">passions</span>:{' '}
+                  [<span className="text-[var(--neon-green)]">{`"Full-Stack Web"`}</span>,{' '}
+                  <span className="text-[var(--neon-green)]">{`"Machine Learning"`}</span>,{' '}
+                  <span className="text-[var(--neon-green)]">{`"Blockchain"`}</span>,{' '}
+                  <span className="text-[var(--neon-green)]">{`"Computer Vision"`}</span>],
+                </p>
+                <p>
+                  <span className="text-[var(--neon-pink)]">mission</span>:{' '}
+                  <span className="text-[var(--neon-green)]">{`"Solving real-world problems with code"`}</span>,
+                </p>
+                <p>
+                  <span className="text-[var(--neon-pink)]">currently</span>:{' '}
+                  <span className="text-[var(--neon-green)]">{`"Hacking neural nets & shipping software"`}</span>,
+                </p>
+              </div>
+              <p className="text-[var(--text-muted)] mb-4">{'};'}</p>
+
+              <div className="border-t border-[var(--border-color)] pt-4 mt-2 text-[var(--text-secondary)]">
+                <div className="text-[var(--text-muted)] mb-2">{`# bio`}</div>
+                <p>
+                  As a Computer Engineer, I&apos;m passionate about Full Stack Web Development, Machine Learning &amp;
+                  exploring emerging technologies. I possess a relentless desire to solve real world problems
+                  through clean, efficient code. Hardworking, responsible team player and eager to contribute
+                  &amp; learn within dynamic environments.
+                </p>
+              </div>
+
+              <div className="mt-5 text-[var(--neon-green)]">
+                <span className="text-[var(--neon-amber)]">~$ </span>
+                <span>echo $STATUS</span>
+              </div>
+              <div className="text-[var(--text-secondary)] pl-3">
+                &gt; ready_for_collaboration: <span className="text-[var(--neon-green)]">true</span>
+              </div>
+            </div>
+          </TerminalWindow>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="lg:col-span-5 space-y-6"
+        >
+          <TerminalWindow title="~/stats --json">
+            <div className="p-5">
+              <div className="grid grid-cols-2 gap-3">
+                {STATS.map((s) => (
+                  <div
+                    key={s.label}
+                    className="border border-[var(--border-color)] p-3 hover-lift"
+                    style={{ background: 'rgba(0,0,0,0.4)' }}
+                  >
+                    <div
+                      className="text-2xl md:text-3xl font-bold font-mono"
+                      style={{ color: s.accent, textShadow: `0 0 6px ${s.accent}` }}
+                    >
+                      {s.value}
+                    </div>
+                    <div className="text-[11px] text-[var(--text-muted)] mt-1 uppercase tracking-wider">
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </TerminalWindow>
+
+          <TerminalWindow title="./mission --print">
+            <div className="p-5 font-mono text-[13.5px] text-[var(--text-secondary)] space-y-2">
+              <div>
+                <span className="text-[var(--neon-amber)]">[01]</span> Build secure, scalable systems.
+              </div>
+              <div>
+                <span className="text-[var(--neon-amber)]">[02]</span> Train models that ship to production.
+              </div>
+              <div>
+                <span className="text-[var(--neon-amber)]">[03]</span> Reverse-engineer hard problems.
+              </div>
+              <div>
+                <span className="text-[var(--neon-amber)]">[04]</span> Never stop learning, never stop shipping.
+              </div>
+            </div>
+          </TerminalWindow>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

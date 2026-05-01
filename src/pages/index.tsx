@@ -1,67 +1,52 @@
 import Head from 'next/head';
-import { Container, Typography, Box, Grid, Button } from '@mui/material';
-import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import FloatingShell from '../components/FloatingShell';
 import About from '../components/About';
-import Projects from '../components/Projects';
-import Contact from '../components/Contact';
 import IndustryExperience from '../components/IndustryExperience';
-import Education from '@/components/Education';
+import Projects from '../components/Projects';
 import TechStack from '../components/TechStack';
-import Footer from '@/components/Footer';
-import Gallery from '@/components/Gallery';
-import Certifications from '@/components/Certifications';
-// import backgroundImage from 'https://png.pngtree.com/thumb_back/fh260/background/20230415/pngtree-website-technology-line-dark-background-image_2344719.jpg'; // Corrected path to the background image
+import Education from '../components/Education';
+import Certifications from '../components/Certifications';
+import Gallery from '../components/Gallery';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import MatrixRain from '../components/ui/MatrixRain';
 
 const Home = () => {
   return (
-    <Box
-      sx={{
-        // backgroundImage: `url(https://images.unsplash.com/photo-1579546929662-711aa81148cf?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, // Apply background image
-        backgroundImage: `url(https://images.unsplash.com/photo-1518014179319-21e9e8139b05?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, // Apply background image
-        // backgroundImage: `url(https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, // Apply background image
-        // backgroundImage: `url(https://plus.unsplash.com/premium_photo-1667105168121-0fe3333b5b14?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
-        backgroundSize: 'cover', // Cover the entire page
-        backgroundPosition: 'center', // Center the background image
-        minHeight: '100vh', // Make sure the box fills the entire viewport height
-        padding: '2rem', // Add padding for borders
-      }}
-    >
-      <Container maxWidth="xl">
-        <Head>
-          <title>Chanvitha Praveen</title>
-          <meta name="description" content="My personal portfolio" />
-        </Head>
+    <>
+      <Head>
+        <title>chanvitha.praveen :: ./terminal</title>
+        <meta
+          name="description"
+          content="Chanvitha Praveen — Computer Engineer · Full-Stack & ML/AI Developer. Cyber-themed portfolio."
+        />
+        <meta name="theme-color" content="#00ff41" />
+        <link rel="icon" type="image/png" href="/my-photo.png" />
+      </Head>
+
+      <MatrixRain opacity={0.18} />
+
+      <div className="relative z-10 min-h-screen">
         <Navbar />
-        <Box id="about" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+        <main className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 grid-bg">
+          <div id="hero">
+            <Hero />
+          </div>
           <About />
-        </Box>
-        <Box id="industry-experience" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
           <IndustryExperience />
-        </Box>
-        <Box id="projects" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
           <Projects />
-        </Box>
-        <Box id="education" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-          <Education />
-        </Box>
-        <Box id="techstack" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
           <TechStack />
-        </Box>
-        <Box id="certifications" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+          <Education />
           <Certifications />
-        </Box>
-        <Box id="gallery" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
           <Gallery />
-        </Box>
-        <Box id="contact" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
           <Contact />
-        </Box>
-        <Box id="footer" component={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-          <Footer />
-        </Box>
-      </Container>
-    </Box>
+        </main>
+        <Footer />
+        <FloatingShell />
+      </div>
+    </>
   );
 };
 

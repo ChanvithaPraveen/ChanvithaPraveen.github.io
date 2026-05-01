@@ -1,80 +1,81 @@
-import { Typography, Card, CardContent, CardMedia, Box, Chip, useTheme, useMediaQuery } from '@mui/material';
-import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot, TimelineOppositeContent } from '@mui/lab';
+import { motion } from 'framer-motion';
 import experiences from '../data/experience';
-
+import SectionHeader from './ui/SectionHeader';
+import TerminalWindow from './ui/TerminalWindow';
 
 const IndustryExperience = () => {
-    const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  return (
+    <section id="experience" className="py-12 md:py-16">
+      <SectionHeader
+        index="02"
+        command="git log --pretty=full --branch=career"
+        title="experience.log"
+        subtitle="Tracing operator's professional commits..."
+      />
 
-    return (
-        <Box id="industry-experience" sx={{ mt: '0rem', padding: '6rem 1rem', textAlign: 'center' }}>
-            <Box
-                sx={{
-                    display: 'inline-block',
-                    padding: '0.5rem',
-                    width: isSmallScreen ? '100%' : '270px',
-                    borderRadius: '50px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                    backdropFilter: 'blur(10px)',
-                    marginBottom: '2rem',
-                }}
-            >
-                <Typography variant="h5" sx={{ color: theme.palette.secondary.main }}>Industry Experience</Typography>
-            </Box>
-            <Timeline position={isSmallScreen ? "right" : "alternate"}>
-                {experiences.map((experience, index) => (
-                    <TimelineItem key={index}>
-                        <TimelineOppositeContent
-                            sx={{
-                                flex: 1,
-                                py: 1,
-                                px: 2,
-                                textAlign: 'right',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                color: theme.palette.text.secondary,
-                            }}
-                        >
-                            <Typography variant="body1">
-                                {experience.startDate} - {experience.endDate}
-                            </Typography>
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineConnector />
-                            <TimelineDot color="secondary" />
-                            {index < experiences.length - 1 && <TimelineConnector />}
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            <Card sx={{ display: 'flex', flexDirection: isSmallScreen ? 'column' : 'row', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.4)', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', borderRadius: '15px', }}>
-                                <CardMedia
-                                    component="img"
-                                    sx={{ width: isSmallScreen ? '100%' : 220, height: isSmallScreen ? 'auto' : 'auto', marginLeft: '1rem', marginRight: '1rem', borderRadius: '8px' }}
-                                    image={experience.image}
-                                    alt={experience.company}
-                                />
-                                <CardContent sx={{ flex: 1 }}>
-                                    <Typography variant="h6" component="div" sx={{ color: theme.palette.primary.main }}>
-                                        {experience.title} at {experience.company}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" sx={{ color: theme.palette.text.secondary }}>
-                                        {experience.description}
-                                    </Typography>
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
-                                        {experience.technologies.map((tech, techIndex) => (
-                                            <Chip label={tech} key={techIndex} />
-                                        ))}
-                                    </Box>
-                                </CardContent>
-                            </Card>
-                        </TimelineContent>
-                    </TimelineItem>
-                ))}
-            </Timeline>
-        </Box>
-    );
+      <div className="space-y-5">
+        {experiences.map((exp, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
+          >
+            <TerminalWindow title={`commit ${(0xa1f4b3c + idx * 0x731).toString(16)}...`}>
+              <div className="p-5 md:p-6 font-mono text-[14px]">
+                <div className="grid lg:grid-cols-12 gap-5">
+                  <div className="lg:col-span-3 flex lg:flex-col items-start gap-4">
+                    <div
+                      className="w-16 h-16 md:w-20 md:h-20 border border-[var(--border-color)] p-1.5 grid place-items-center"
+                      style={{ background: 'rgba(255,255,255,0.04)' }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={exp.image} alt={exp.company} className="max-w-full max-h-full object-contain" />
+                    </div>
+                    <div>
+                      <div className="text-[var(--neon-amber)] text-[12px]">[ DURATION ]</div>
+                      <div className="text-[var(--text-primary)] text-[13px]">
+                        {exp.startDate}
+                        <span className="text-[var(--text-muted)] mx-1">→</span>
+                        {exp.endDate}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-9 space-y-3">
+                    <div>
+                      <div className="text-[var(--text-muted)] text-[12px]">
+                        Author: <span className="text-[var(--neon-cyan)]">chanvitha@{exp.company.split(' ')[0].toLowerCase()}</span>
+                      </div>
+                      <div className="text-[var(--neon-green)] text-lg md:text-xl font-bold mt-1 leading-tight">
+                        {exp.title}
+                      </div>
+                      <div className="text-[var(--text-secondary)] text-[13px]">
+                        @ {exp.company}
+                      </div>
+                    </div>
+
+                    <p className="text-[var(--text-primary)] text-[13.5px] leading-6 border-l-2 border-[var(--neon-green)] pl-3">
+                      {exp.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {exp.technologies.map((t) => (
+                        <span key={t} className="tag">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </TerminalWindow>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default IndustryExperience;
