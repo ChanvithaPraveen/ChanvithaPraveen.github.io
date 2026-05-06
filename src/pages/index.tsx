@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import FloatingShell from '../components/FloatingShell';
 import About from '../components/About';
 import IndustryExperience from '../components/IndustryExperience';
 import Projects from '../components/Projects';
@@ -44,7 +43,6 @@ const Home = () => {
           <Contact />
         </main>
         <Footer />
-        <FloatingShell />
       </div>
     </>
   );

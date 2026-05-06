@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import Head from 'next/head';
 import darkTheme from '../theme';
+import ChanaLauncher from '../components/chana/ChanaLauncher';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Component {...pageProps} />
+      <ChanaLauncher />
     </ThemeProvider>
   );
 }
