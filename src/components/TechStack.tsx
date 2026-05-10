@@ -32,21 +32,49 @@ const TechStack = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: (i % 16) * 0.025 }}
                 whileHover={{ y: -4 }}
-                className="group flex flex-col items-center gap-1.5 p-3 border border-[var(--border-color)] hover:border-[var(--neon-green)] transition-all hover-lift"
+                className="group relative overflow-hidden flex flex-col items-center gap-1.5 p-3 border border-[var(--border-color)] hover:border-[var(--neon-green)] transition-all hover-lift"
                 style={{ background: 'rgba(0, 0, 0, 0.4)' }}
               >
-                <div
-                  className="w-10 h-10 md:w-12 md:h-12 grid place-items-center"
-                  style={{ filter: 'drop-shadow(0 0 4px rgba(0,255,65,0.25))' }}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"
+                  style={{
+                    background:
+                      'linear-gradient(110deg, transparent 35%, rgba(0,255,65,0.18) 50%, transparent 65%)',
+                  }}
+                />
+                <motion.div
+                  className="w-10 h-10 md:w-12 md:h-12 grid place-items-center tech-icon-float"
+                  style={{
+                    filter: 'drop-shadow(0 0 4px rgba(0,255,65,0.25))',
+                    animationDelay: `${(i % 8) * 0.25}s`,
+                  }}
+                  whileHover={{ rotate: 360, scale: 1.15 }}
+                  transition={{ duration: 0.9, ease: 'easeInOut' }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={s.logo}
                     alt={s.label}
                     className="max-w-full max-h-full object-contain"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      img.style.display = 'none';
+                      const fallback = img.nextElementSibling as HTMLElement | null;
+                      if (fallback) fallback.style.display = 'grid';
+                    }}
                   />
-                </div>
-                <span className="text-[10.5px] font-mono text-[var(--text-secondary)] group-hover:text-[var(--neon-green)] tracking-wide text-center break-all">
+                  <span
+                    className="hidden w-full h-full place-items-center font-mono text-[11px] font-bold border border-[var(--neon-green)] text-[var(--neon-green)]"
+                    style={{
+                      background: 'rgba(0,255,65,0.08)',
+                      textShadow: '0 0 4px rgba(0,255,65,0.6)',
+                    }}
+                  >
+                    {s.label.replace(/\.js$/, '').slice(0, 3).toUpperCase()}
+                  </span>
+                </motion.div>
+                <span className="relative text-[10.5px] font-mono text-[var(--text-secondary)] group-hover:text-[var(--neon-green)] tracking-wide text-center break-all">
                   {s.label.replace(/\.js$/, '')}
                 </span>
               </motion.div>

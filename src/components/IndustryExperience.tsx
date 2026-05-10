@@ -27,11 +27,24 @@ const IndustryExperience = () => {
                 <div className="grid lg:grid-cols-12 gap-5">
                   <div className="lg:col-span-3 flex lg:flex-col items-start gap-4">
                     <div
-                      className="w-16 h-16 md:w-20 md:h-20 border border-[var(--border-color)] p-1.5 grid place-items-center"
+                      className="exp-logo group/logo relative w-16 h-16 md:w-20 md:h-20 border border-[var(--border-color)] p-1.5 grid place-items-center overflow-hidden"
                       style={{ background: 'rgba(255,255,255,0.04)' }}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={exp.image} alt={exp.company} className="max-w-full max-h-full object-contain" />
+                      <img
+                        src={exp.image}
+                        alt={exp.company}
+                        className="exp-logo-base max-w-full max-h-full object-contain transition-opacity duration-300"
+                      />
+                      {exp.hoverImage && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={exp.hoverImage}
+                          alt=""
+                          aria-hidden
+                          className="exp-logo-hover absolute inset-0 w-full h-full object-contain p-1.5 opacity-0 transition-opacity duration-300"
+                        />
+                      )}
                     </div>
                     <div>
                       <div className="text-[var(--neon-amber)] text-[12px]">[ DURATION ]</div>
@@ -45,10 +58,7 @@ const IndustryExperience = () => {
 
                   <div className="lg:col-span-9 space-y-3">
                     <div>
-                      <div className="text-[var(--text-muted)] text-[12px]">
-                        Author: <span className="text-[var(--neon-cyan)]">chanvitha@{exp.company.split(' ')[0].toLowerCase()}</span>
-                      </div>
-                      <div className="text-[var(--neon-green)] text-lg md:text-xl font-bold mt-1 leading-tight">
+                      <div className="text-[var(--neon-green)] text-lg md:text-xl font-bold leading-tight">
                         {exp.title}
                       </div>
                       <div className="text-[var(--text-secondary)] text-[13px]">

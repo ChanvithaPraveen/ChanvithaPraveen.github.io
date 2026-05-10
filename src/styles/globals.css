@@ -164,6 +164,32 @@ body::after {
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
+@keyframes tech-icon-float {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 4px rgba(0, 255, 65, 0.25));
+  }
+  50% {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.55));
+  }
+}
+
+.tech-icon-float {
+  animation: tech-icon-float 3.2s ease-in-out infinite;
+}
+
+.group:hover .tech-icon-float {
+  animation-play-state: paused;
+}
+
+.exp-logo:hover .exp-logo-base {
+  opacity: 0;
+}
+.exp-logo:hover .exp-logo-hover {
+  opacity: 1;
+}
+
 /* ============ Utility Classes ============ */
 .font-mono { font-family: var(--font-mono); }
 .font-terminal { font-family: var(--font-terminal); }

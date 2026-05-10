@@ -3,6 +3,7 @@ import SectionHeader from './ui/SectionHeader';
 import TerminalWindow from './ui/TerminalWindow';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { useSfx } from '../hooks/useSfx';
 
 interface Cert {
   logo: string;
@@ -51,6 +52,7 @@ const certifications: Cert[] = [
 ];
 
 const Certifications = () => {
+  const { play } = useSfx();
   return (
     <section id="certifications" className="py-12 md:py-16">
       <SectionHeader
@@ -67,6 +69,7 @@ const Certifications = () => {
             href={c.link}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => play('beep')}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import DownloadIcon from '@mui/icons-material/Download';
+import SfxToggle from './ui/SfxToggle';
+import { useSfx } from '../hooks/useSfx';
 
 const NAV_ITEMS = [
   { id: 'about', cmd: 'cd ./about' },
@@ -11,6 +12,7 @@ const NAV_ITEMS = [
   { id: 'skills', cmd: 'cat skills.json' },
   { id: 'education', cmd: 'cd ./edu' },
   { id: 'certifications', cmd: 'cd ./certs' },
+  { id: 'publications', cmd: 'cat ./papers.bib' },
   { id: 'gallery', cmd: 'open ./gallery' },
   { id: 'contact', cmd: 'mail --to=me' },
 ];
@@ -19,6 +21,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState('');
   const [active, setActive] = useState('about');
+  const { play } = useSfx();
 
   useEffect(() => {
     const tick = () =>
@@ -51,9 +54,15 @@ const Navbar = () => {
   }, []);
 
   const scrollTo = (id: string) => {
+    play('click');
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setOpen(false);
+  };
+
+  const toggleMobile = () => {
+    play(open ? 'close' : 'open');
+    setOpen(!open);
   };
 
   return (
@@ -108,28 +117,24 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-3 ml-auto">
-            <a
-              href="/Resume of Chanvitha Praveen.pdf"
-              download
-              className="btn-cyber"
-              style={{ padding: '4px 10px', fontSize: 11 }}
-            >
-              <DownloadIcon style={{ fontSize: 14 }} /> resume
-            </a>
+            <SfxToggle compact />
             <span className="text-[12px] text-[var(--text-secondary)] font-mono">
               <span className="text-[var(--neon-amber)]">●</span>{' '}
               <span className="text-[var(--text-muted)]">UTC</span> {time}
             </span>
           </div>
 
-          <button
-            className="lg:hidden ml-auto text-[var(--neon-green)] p-1"
-            onClick={() => setOpen(!open)}
-            aria-label="menu"
-            style={{ background: 'transparent', border: 'none' }}
-          >
-            {open ? <CloseIcon /> : <MenuIcon />}
-          </button>
+          <div className="lg:hidden ml-auto flex items-center gap-2">
+            <SfxToggle compact />
+            <button
+              className="text-[var(--neon-green)] p-1"
+              onClick={toggleMobile}
+              aria-label="menu"
+              style={{ background: 'transparent', border: 'none' }}
+            >
+              {open ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -156,14 +161,6 @@ const Navbar = () => {
                 {it.cmd}
               </button>
             ))}
-            <a
-              href="/Resume of Chanvitha Praveen.pdf"
-              download
-              className="block px-3 py-2 text-[13px] text-[var(--neon-amber)] hover:bg-[rgba(255,176,0,0.05)]"
-            >
-              <DownloadIcon style={{ fontSize: 14, marginRight: 6 }} />
-              wget resume.pdf
-            </a>
           </div>
         </motion.div>
       )}

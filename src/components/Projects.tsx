@@ -7,6 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LaunchIcon from '@mui/icons-material/Launch';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSfx } from '../hooks/useSfx';
 
 interface Project {
   title: string;
@@ -20,6 +21,15 @@ interface Project {
 
 const Projects = () => {
   const [active, setActive] = useState<Project | null>(null);
+  const { play } = useSfx();
+  const openProject = (p: Project) => {
+    play('open');
+    setActive(p);
+  };
+  const closeProject = () => {
+    play('close');
+    setActive(null);
+  };
 
   return (
     <section id="projects" className="py-12 md:py-16">
@@ -65,7 +75,7 @@ const Projects = () => {
                 </div>
                 {p.video && p.video !== '/' && (
                   <button
-                    onClick={() => setActive(p)}
+                    onClick={() => openProject(p)}
                     className="absolute bottom-2 right-2 w-9 h-9 grid place-items-center border border-[var(--neon-green)] text-[var(--neon-green)] hover:bg-[rgba(0,255,65,0.15)]"
                     style={{ background: 'rgba(0,0,0,0.7)' }}
                     aria-label="play preview"
@@ -120,7 +130,7 @@ const Projects = () => {
                   )}
                   {p.video && p.video !== '/' && (
                     <button
-                      onClick={() => setActive(p)}
+                      onClick={() => openProject(p)}
                       className="btn-cyber"
                       style={{
                         padding: '4px 10px',
@@ -147,7 +157,7 @@ const Projects = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] grid place-items-center p-4"
             style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(6px)' }}
-            onClick={() => setActive(null)}
+            onClick={closeProject}
           >
             <motion.div
               initial={{ scale: 0.95, y: 12 }}
@@ -162,7 +172,7 @@ const Projects = () => {
                 <span className="terminal-dot dot-green" />
                 <span style={{ marginLeft: 12 }}>./{slugify(active.title)} --preview</span>
                 <button
-                  onClick={() => setActive(null)}
+                  onClick={closeProject}
                   className="ml-auto text-[var(--text-secondary)]"
                   style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
                   aria-label="close"

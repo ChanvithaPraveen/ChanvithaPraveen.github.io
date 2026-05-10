@@ -5,8 +5,8 @@ import TerminalWindow from './ui/TerminalWindow';
 const STATS = [
   { label: 'projects_built', value: '30+', accent: 'var(--neon-green)' },
   { label: 'years_coding', value: '6+', accent: 'var(--neon-cyan)' },
-  { label: 'tech_stack', value: '20+', accent: 'var(--neon-amber)' },
-  { label: 'coffee_consumed', value: '∞', accent: 'var(--neon-pink)' },
+  { label: 'tech_stack', value: '40+', accent: 'var(--neon-amber)' },
+  { label: 'microservices', value: '12', accent: 'var(--neon-pink)' },
 ];
 
 const About = () => {
@@ -48,8 +48,9 @@ const About = () => {
                 <p>
                   <span className="text-[var(--neon-pink)]">passions</span>:{' '}
                   [<span className="text-[var(--neon-green)]">{`"Full-Stack Web"`}</span>,{' '}
+                  <span className="text-[var(--neon-green)]">{`"Microservices"`}</span>,{' '}
                   <span className="text-[var(--neon-green)]">{`"Machine Learning"`}</span>,{' '}
-                  <span className="text-[var(--neon-green)]">{`"Blockchain"`}</span>,{' '}
+                  <span className="text-[var(--neon-green)]">{`"Generative AI"`}</span>,{' '}
                   <span className="text-[var(--neon-green)]">{`"Computer Vision"`}</span>],
                 </p>
                 <p>
@@ -58,7 +59,11 @@ const About = () => {
                 </p>
                 <p>
                   <span className="text-[var(--neon-pink)]">currently</span>:{' '}
-                  <span className="text-[var(--neon-green)]">{`"Hacking neural nets & shipping software"`}</span>,
+                  <span className="text-[var(--neon-green)]">{`"Software Engineer @ Singapore-based Logistics SaaS"`}</span>,
+                </p>
+                <p>
+                  <span className="text-[var(--neon-pink)]">stack</span>:{' '}
+                  <span className="text-[var(--neon-green)]">{`"Angular · NestJS · Java/Spring · Python · MongoDB · GCloud · K8s"`}</span>,
                 </p>
               </div>
               <p className="text-[var(--text-muted)] mb-4">{'};'}</p>
@@ -67,9 +72,11 @@ const About = () => {
                 <div className="text-[var(--text-muted)] mb-2">{`# bio`}</div>
                 <p>
                   As a Computer Engineer, I&apos;m passionate about Full Stack Web Development, Machine Learning &amp;
-                  exploring emerging technologies. I possess a relentless desire to solve real world problems
-                  through clean, efficient code. Hardworking, responsible team player and eager to contribute
-                  &amp; learn within dynamic environments.
+                  exploring emerging technologies. Currently shipping a 12-microservice logistics platform that
+                  serves 7 major clients and 20+ operations — building KPI dashboards, revamping the GPS module,
+                  and stabilising L1 issues with unit tests. Off-hours: generative AI, vision-transformer research,
+                  and photography. Hardworking, responsible team player and eager to contribute &amp; learn within
+                  dynamic environments.
                 </p>
               </div>
 

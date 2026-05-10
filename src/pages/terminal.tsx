@@ -19,7 +19,7 @@ const TerminalPage = () => {
         <title>chanvitha :: live_kernel.sh</title>
         <meta name="description" content="Public read-only Linux-style shell into Chanvitha's profile." />
         <meta name="theme-color" content="#00ff41" />
-        <link rel="icon" type="image/png" href="/my-photo.png" />
+        <link rel="icon" type="image/png" href="/my-photo-new.png" />
       </Head>
 
       <MatrixRain opacity={0.1} />

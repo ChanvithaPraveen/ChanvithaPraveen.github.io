@@ -12,6 +12,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import Typewriter from './ui/Typewriter';
 import GlitchText from './ui/GlitchText';
 import TerminalWindow from './ui/TerminalWindow';
+import { useSfx } from '../hooks/useSfx';
 
 const bootLines = [
   { text: '[ OK ] Initializing kernel modules...', color: 'var(--text-secondary)' },
@@ -35,15 +36,20 @@ const ASCII = `
 const Hero = () => {
   const [bootStep, setBootStep] = useState(0);
   const [bootDone, setBootDone] = useState(false);
+  const { play } = useSfx();
 
   useEffect(() => {
     if (bootStep < bootLines.length) {
+      play('type');
       const t = setTimeout(() => setBootStep((s) => s + 1), 320);
       return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setBootDone(true), 600);
+    const t = setTimeout(() => {
+      setBootDone(true);
+      play('boot');
+    }, 600);
     return () => clearTimeout(t);
-  }, [bootStep]);
+  }, [bootStep, play]);
 
   return (
     <section id="hero" className="relative pt-12 md:pt-16 pb-12">
@@ -97,6 +103,7 @@ const Hero = () => {
             >
               <Link
                 href="/terminal"
+                onClick={() => play('open')}
                 className="btn-cyber"
                 style={{
                   fontWeight: 'bold',
@@ -105,12 +112,17 @@ const Hero = () => {
               >
                 <span>&gt;_</span> launch live terminal
               </Link>
-              <a href="#projects" className="btn-cyber btn-cyber-cyan">
+              <a
+                href="#projects"
+                onClick={() => play('click')}
+                className="btn-cyber btn-cyber-cyan"
+              >
                 <span>$</span> view projects
               </a>
               <a
                 href="/Resume of Chanvitha Praveen.pdf"
                 download
+                onClick={() => play('beep')}
                 className="btn-cyber"
                 style={{ color: 'var(--neon-amber)', borderColor: 'var(--neon-amber)' }}
               >
@@ -134,7 +146,7 @@ const Hero = () => {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/my-photo.png"
+                      src="/profile-image-1.gif"
                       alt="Chanvitha Praveen"
                       className="w-full h-full object-cover"
                       style={{ filter: 'contrast(1.05) saturate(0.9) hue-rotate(-8deg)' }}

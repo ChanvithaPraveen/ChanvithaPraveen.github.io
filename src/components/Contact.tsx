@@ -7,6 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import SendIcon from '@mui/icons-material/Send';
+import { useSfx } from '../hooks/useSfx';
 
 // EmailJS configuration — values come from .env.local (NEXT_PUBLIC_*).
 // See EMAIL_SETUP.md in the repo root for step-by-step setup.
@@ -22,6 +23,7 @@ const Contact = () => {
   const [msg, setMsg] = useState('');
   const [status, setStatus] = useState<SendStatus>('idle');
   const [errorText, setErrorText] = useState('');
+  const { play } = useSfx();
 
   const isConfigured =
     EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY;
@@ -36,9 +38,11 @@ const Contact = () => {
       const body = encodeURIComponent(`${msg}\n\n--\n${name}\n${email}`);
       window.location.href = `mailto:chanvithapraween@gmail.com?subject=${subject}&body=${body}`;
       setStatus('success');
+      play('success');
       return;
     }
 
+    play('beep');
     setStatus('sending');
     setErrorText('');
 
@@ -58,6 +62,7 @@ const Contact = () => {
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
       setStatus('success');
+      play('success');
       setName('');
       setEmail('');
       setMsg('');
@@ -68,13 +73,14 @@ const Contact = () => {
         'transmission failed — please try again or email directly.';
       setErrorText(message);
       setStatus('error');
+      play('deny');
     }
   };
 
   return (
     <section id="contact" className="py-12 md:py-16">
       <SectionHeader
-        index="08"
+        index="09"
         command="ssh -p 22 chanvitha@portfolio"
         title="establish_link()"
         subtitle="Open a secure channel · response time ~24h"
@@ -225,7 +231,7 @@ const Contact = () => {
             </div>
           </TerminalWindow>
 
-          <TerminalWindow title="./pgp.key">
+          {/* <TerminalWindow title="./pgp.key">
             <div className="p-5 font-mono text-[11.5px] text-[var(--text-secondary)] leading-5">
               <div className="text-[var(--text-muted)] mb-2">{`// fingerprint snippet`}</div>
               <pre className="text-[var(--neon-green)] whitespace-pre-wrap break-all">
@@ -236,7 +242,7 @@ xsBNBGhA1xCh4nv1th4Pr4ve3n1nT3rn3t...
 -----END PGP PUBLIC KEY BLOCK-----`}
               </pre>
             </div>
-          </TerminalWindow>
+          </TerminalWindow> */}
         </motion.div>
       </div>
     </section>

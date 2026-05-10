@@ -18,7 +18,7 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-12 md:py-16">
       <SectionHeader
-        index="07"
+        index="08"
         command="render --gallery --resolution=full"
         title="memory.bank"
         subtitle={`${items.length} encrypted memories · click to decrypt`}

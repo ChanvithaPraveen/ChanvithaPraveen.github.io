@@ -7,6 +7,7 @@ import Projects from '../components/Projects';
 import TechStack from '../components/TechStack';
 import Education from '../components/Education';
 import Certifications from '../components/Certifications';
+import Publications from '../components/Publications';
 import Gallery from '../components/Gallery';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -22,7 +23,7 @@ const Home = () => {
           content="Chanvitha Praveen — Computer Engineer · Full-Stack & ML/AI Developer. Cyber-themed portfolio."
         />
         <meta name="theme-color" content="#00ff41" />
-        <link rel="icon" type="image/png" href="/my-photo.png" />
+        <link rel="icon" type="image/png" href="/my-photo-new.png" />
       </Head>
 
       <MatrixRain opacity={0.18} />
@@ -39,6 +40,7 @@ const Home = () => {
           <TechStack />
           <Education />
           <Certifications />
+          <Publications />
           <Gallery />
           <Contact />
         </main>
